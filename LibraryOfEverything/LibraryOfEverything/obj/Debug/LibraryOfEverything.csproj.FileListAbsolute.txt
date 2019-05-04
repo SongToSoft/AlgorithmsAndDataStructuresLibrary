@@ -1,0 +1,6 @@
+C:\Users\dbogdano\source\repos\LibraryOfEverything\LibraryOfEverything\bin\Debug\LibraryOfEverything.dll
+C:\Users\dbogdano\source\repos\LibraryOfEverything\LibraryOfEverything\bin\Debug\LibraryOfEverything.pdb
+C:\Users\dbogdano\source\repos\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.csprojAssemblyReference.cache
+C:\Users\dbogdano\source\repos\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.csproj.CoreCompileInputs.cache
+C:\Users\dbogdano\source\repos\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.dll
+C:\Users\dbogdano\source\repos\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.pdb
