@@ -114,23 +114,23 @@ namespace LibraryOfEverything
                 return result;
             }
 
-            public static Vector<T> operator * (Vector<T> vec1, double value)
+            public static Vector<T> operator * (Vector<T> vec, double value)
             {
                 Vector<T> result = new Vector<T>();
-                for (int i = 0; i < vec1.Count(); ++i)
+                for (int i = 0; i < vec.Count(); ++i)
                 {
-                    var vecValue = vec1.GetValue(i) as dynamic;
+                    var vecValue = vec.GetValue(i) as dynamic;
                     result.AddValue(vecValue * value);
                 }
                 return result;
             }
 
-            public static Vector<T> operator / (Vector<T> vec1, double value)
+            public static Vector<T> operator / (Vector<T> vec, double value)
             {
                 Vector<T> result = new Vector<T>();
-                for (int i = 0; i < vec1.Count(); ++i)
+                for (int i = 0; i < vec.Count(); ++i)
                 {
-                    var vecValue = vec1.GetValue(i) as dynamic;
+                    var vecValue = vec.GetValue(i) as dynamic;
                     result.AddValue(vecValue / value);
                 }
                 return result;
