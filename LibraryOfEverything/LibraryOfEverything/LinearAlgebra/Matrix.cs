@@ -100,6 +100,22 @@ namespace LibraryOfEverything
                 return result;
             }
 
+            public Matrix<T> Rotate()
+            {
+                Matrix<T> result = new Matrix<T>(Width(), Height());
+                int k = 0;
+                for (int j = 0; j < Width(); ++j)
+                {
+                    int w = 0;
+                    for (int i = Height() - 1; i >= 0; --i)
+                    {
+                        result.SetValue(k, w, m_values[i, j]);
+                        ++w;
+                    }
+                    ++k;
+                }
+                return result;
+            }
             public static Matrix<T> operator * (Matrix<T> matrix, double value)
             {
                 Matrix<T> result = new Matrix<T>(matrix.Height(), matrix.Width());

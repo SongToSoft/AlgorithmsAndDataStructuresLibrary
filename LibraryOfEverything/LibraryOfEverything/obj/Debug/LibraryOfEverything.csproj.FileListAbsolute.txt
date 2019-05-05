@@ -4,3 +4,9 @@ C:\Users\dbogdano\source\repos\LibraryOfEverything\LibraryOfEverything\obj\Debug
 C:\Users\dbogdano\source\repos\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.csproj.CoreCompileInputs.cache
 C:\Users\dbogdano\source\repos\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.dll
 C:\Users\dbogdano\source\repos\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.pdb
+C:\Users\dbogdano\Documents\GitHub\LibraryOfEverything\LibraryOfEverything\LibraryOfEverything\bin\Debug\LibraryOfEverything.dll
+C:\Users\dbogdano\Documents\GitHub\LibraryOfEverything\LibraryOfEverything\LibraryOfEverything\bin\Debug\LibraryOfEverything.pdb
+C:\Users\dbogdano\Documents\GitHub\LibraryOfEverything\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.csprojAssemblyReference.cache
+C:\Users\dbogdano\Documents\GitHub\LibraryOfEverything\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.csproj.CoreCompileInputs.cache
+C:\Users\dbogdano\Documents\GitHub\LibraryOfEverything\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.dll
+C:\Users\dbogdano\Documents\GitHub\LibraryOfEverything\LibraryOfEverything\LibraryOfEverything\obj\Debug\LibraryOfEverything.pdb
