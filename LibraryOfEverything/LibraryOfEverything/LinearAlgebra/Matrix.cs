@@ -100,19 +100,6 @@ namespace LibraryOfEverything
                 return result;
             }
 
-            public Matrix<T> AntiClockwiseRotation()
-            {
-                Matrix<T> result = new Matrix<T>(Width(), Height());
-                for (int i = 0; i < Height(); ++i)
-                {
-                    for (int j = 0; j < Width(); ++j)
-                    {
-                        result.SetValue(i, j, GetValue(i, j));
-                    }
-                }
-                return result;
-            }
-
             public static Matrix<T> operator * (Matrix<T> matrix, double value)
             {
                 Matrix<T> result = new Matrix<T>(matrix.Height(), matrix.Width());
