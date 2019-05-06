@@ -100,7 +100,7 @@ namespace LibraryOfEverything
                 return result;
             }
 
-            public Matrix<T> Rotate()
+            public Matrix<T> ClockwiseRotate()
             {
                 Matrix<T> result = new Matrix<T>(Width(), Height());
                 int k = 0;
@@ -116,6 +116,24 @@ namespace LibraryOfEverything
                 }
                 return result;
             }
+
+            public Matrix<T> CounterClockwiseRotate()
+            {
+                Matrix<T> result = new Matrix<T>(Width(), Height());
+                int k = 0;
+                for (int j = Width() - 1; j >= 0; --j)
+                {
+                    int w = 0;
+                    for (int i = 0; i < Height(); ++i)
+                    {
+                        result.SetValue(k, w, m_values[i, j]);
+                        ++w;
+                    }
+                    ++k;
+                }
+                return result;
+            }
+
             public static Matrix<T> operator * (Matrix<T> matrix, double value)
             {
                 Matrix<T> result = new Matrix<T>(matrix.Height(), matrix.Width());
