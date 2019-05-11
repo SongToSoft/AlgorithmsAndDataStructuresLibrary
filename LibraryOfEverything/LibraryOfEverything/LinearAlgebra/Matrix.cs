@@ -55,6 +55,36 @@ namespace LibraryOfEverything
                 }
             }
 
+            public Matrix(int sizeI, int sizeJ, List<T> values)
+            {
+                m_height = sizeI;
+                m_width = sizeJ;
+                m_values = new T[m_height, m_width];
+                int count = 0;
+                for (int i = 0; i < m_height; ++i)
+                {
+                    for (int j = 0; j < m_width; ++j)
+                    {
+                        m_values[i, j] = values[count];
+                        ++count;
+                    }
+                }
+            }
+
+            public Matrix(Matrix<T> values)
+            {
+                m_height = values.Height();
+                m_width = values.Width();
+                m_values = new T[m_height, m_width];
+                for (int i = 0; i < m_height; ++i)
+                {
+                    for (int j = 0; j < m_width; ++j)
+                    {
+                        m_values[i, j] = values.GetValue(i, j);
+                    }
+                }
+            }
+
             public int Height()
             {
                 return m_height;
@@ -103,16 +133,16 @@ namespace LibraryOfEverything
             public Matrix<T> ClockwiseRotate()
             {
                 Matrix<T> result = new Matrix<T>(Width(), Height());
-                int k = 0;
+                int countI = 0;
                 for (int j = 0; j < Width(); ++j)
                 {
-                    int w = 0;
+                    int countJ = 0;
                     for (int i = Height() - 1; i >= 0; --i)
                     {
-                        result.SetValue(k, w, m_values[i, j]);
-                        ++w;
+                        result.SetValue(countI, countJ, m_values[i, j]);
+                        ++countJ;
                     }
-                    ++k;
+                    ++countI;
                 }
                 return result;
             }
@@ -120,16 +150,110 @@ namespace LibraryOfEverything
             public Matrix<T> CounterClockwiseRotate()
             {
                 Matrix<T> result = new Matrix<T>(Width(), Height());
-                int k = 0;
+                int countI = 0;
                 for (int j = Width() - 1; j >= 0; --j)
                 {
-                    int w = 0;
+                    int countJ = 0;
                     for (int i = 0; i < Height(); ++i)
                     {
-                        result.SetValue(k, w, m_values[i, j]);
-                        ++w;
+                        result.SetValue(countI, countJ, m_values[i, j]);
+                        ++countJ;
                     }
-                    ++k;
+                    ++countI;
+                }
+                return result;
+            }
+
+            public Matrix<T> GetPart(int startI, int startJ, int sizeI, int sizeJ)
+            {
+                Matrix<T> result = new Matrix<T>(sizeI, sizeJ);
+                int countI = 0;
+                for (int i = startI; i < startI + sizeI; ++i)
+                {
+                    if (i == Height())
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        int countJ = 0;
+                        for (int j = startJ; j < startJ + sizeJ; ++j)
+                        {
+                            if (j == Width())
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                result.SetValue(countI, countJ, GetValue(i, j));
+                                ++countJ;
+                            }
+                        }
+                        ++countI;
+                    }
+                }
+                return result;
+            }
+
+            public dynamic SumAllValues()
+            {
+                dynamic result = default(T);
+                for (int i = 0; i < Height(); ++i)
+                {
+                    for (int j = 0; j < Width(); ++j)
+                    {
+                        var value = GetValue(i, j) as dynamic;
+                        result += value;
+                    }
+                }
+                return result;
+            }
+
+            public List<T> ToList()
+            {
+                List<T> result = new List<T>();
+                for (int i = 0; i < Height(); ++i)
+                {
+                    for (int j = 0; j < Width(); ++j)
+                    {
+                        result.Add(GetValue(i, j));
+                    }
+                }
+                return result;
+            }
+
+            public T GetMaxValue()
+            {
+                T result = GetValue(0, 0);
+                dynamic resultValue = result as dynamic;
+                for (int i = 0; i < Height(); ++i)
+                {
+                    for (int j = 0; j < Width(); ++j)
+                    {
+                        dynamic value = GetValue(i, j) as dynamic;
+                        if (value > resultValue)
+                        {
+                            result = GetValue(i, j);
+                        }
+                    }
+                }
+                return result;
+            }
+
+            public T GetMinValue()
+            {
+                T result = GetValue(0, 0);
+                dynamic resultValue = result as dynamic;
+                for (int i = 0; i < Height(); ++i)
+                {
+                    for (int j = 0; j < Width(); ++j)
+                    {
+                        dynamic value = GetValue(i, j) as dynamic;
+                        if (value < resultValue)
+                        {
+                            result = GetValue(i, j);
+                        }
+                    }
                 }
                 return result;
             }
@@ -240,6 +364,14 @@ namespace LibraryOfEverything
                     }
                 }
                 return result;
+            }
+
+            public static Matrix<T> operator ! (Matrix<T> matrix)
+            {
+                Matrix<T> result = new Matrix<T>(matrix);
+                result *= -1;
+                return result;
+
             }
         }
     }

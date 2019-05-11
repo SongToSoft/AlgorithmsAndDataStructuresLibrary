@@ -80,6 +80,36 @@ namespace LibraryOfEverything
                 m_values.Add(value);
             }
 
+            public T GetMaxValue()
+            {
+                T result = GetValue(0);
+                dynamic resultValue = result as dynamic;
+                for (int i = 1; i < Count(); ++i)
+                {
+                    dynamic value = GetValue(i) as dynamic;
+                    if (value > resultValue)
+                    {
+                        result = GetValue(i);
+                    }
+                }
+                return result;
+            }
+
+            public T GetMinValue()
+            {
+                T result = GetValue(0);
+                dynamic resultValue = result as dynamic;
+                for (int i = 1; i < Count(); ++i)
+                {
+                    dynamic value = GetValue(i) as dynamic;
+                    if (value < resultValue)
+                    {
+                        result = GetValue(i);
+                    }
+                }
+                return result;
+            }
+
             public Vector<T> Reverse()
             {
                 Vector<T> result = new Vector<T>();
