@@ -240,6 +240,37 @@ namespace LibraryOfEverything
                 return result;
             }
 
+            public T GetMaxValueInRow(int index)
+            {
+                T result = GetValue(index, 0);
+                dynamic resultValue = result as dynamic;
+                for (int i = 0; i < Width(); ++i)
+                {
+                    dynamic value = GetValue(index, i) as dynamic;
+                    if (result < value)
+                    {
+                        result = value;
+                    }
+                }
+                return result;
+            }
+
+            public T GetMinValueInRow(int index)
+            {
+                T result = GetValue(index, 0);
+                dynamic resultValue = result as dynamic;
+                for (int i = 0; i < Width(); ++i)
+                {
+                    dynamic value = GetValue(index, i) as dynamic;
+                    if (result > value)
+                    {
+                        result = value;
+                    }
+                }
+                return result;
+            }
+
+
             public T GetMinValue()
             {
                 T result = GetValue(0, 0);
@@ -258,6 +289,145 @@ namespace LibraryOfEverything
                 return result;
             }
 
+            public T GetMaxValueInColumn(int index)
+            {
+                T result = GetValue(0, index);
+                dynamic resultValue = result as dynamic;
+                for (int i = 0; i < Height(); ++i)
+                {
+                    dynamic value = GetValue(i, index) as dynamic;
+                    if (result < value)
+                    {
+                        result = value;
+                    }
+                }
+                return result;
+            }
+
+            public T GetMinValueInColumn(int index)
+            {
+                T result = GetValue(0, index);
+                dynamic resultValue = result as dynamic;
+                for (int i = 0; i < Height(); ++i)
+                {
+                    dynamic value = GetValue(i, index) as dynamic;
+                    if (result > value)
+                    {
+                        result = value;
+                    }
+                }
+                return result;
+            }
+
+            public Matrix<T> ToTriangle()
+            {
+                Matrix<T> result = this;
+                for (int i = 0; i < result.Height() - 1; ++i)
+                {
+                    dynamic coreValue = result.GetValue(i, i) as dynamic;
+                    if (coreValue == default(T))
+                    {
+                        SwapRow(i, i + 1);
+                    }
+                    for (int j = i + 1; j < result.Height(); ++j)
+                    {
+                        dynamic jValue = result.GetValue(j, i) as dynamic;
+                        if (jValue == default(T))
+                        {
+                            continue;
+                        }
+                        result.MulRow(jValue, i);
+                        result.MulRow(coreValue, j);
+                        result = result.LineDifference(j, i);
+                        result.DivideRow(jValue, i);
+                    }
+                }
+                return result;
+            }
+
+            public Matrix<T> LineDifference(int indexFirst, int indexSecond)
+            {
+                Matrix<T> result = this;
+                for (int i = 0; i < result.Width(); ++i)
+                {
+                    dynamic firstValue = result.GetValue(indexFirst, i) as dynamic;
+                    dynamic secondValue = result.GetValue(indexSecond, i) as dynamic;
+                    result.SetValue(indexFirst, i, firstValue - secondValue);
+                }
+                return result;
+            }
+
+            public void DivideRow(T value, int index)
+            {
+                for (int i = 0; i < Width(); ++i)
+                {
+                    dynamic iValue = m_values[index, i] as dynamic;
+                    m_values[index, i] = iValue / value;
+                }
+            }
+
+            public void DivideColumn(T value, int index)
+            {
+                for (int i = 0; i < Height(); ++i)
+                {
+                    dynamic iValue = m_values[i, index] as dynamic;
+                    m_values[i, index] = iValue / value;
+                }
+            }
+            public void MulRow(T value, int index)
+            {
+                for (int i = 0; i < Width(); ++i)
+                {
+                    dynamic iValue = m_values[index, i] as dynamic;
+                    m_values[index, i] = iValue * value;
+                }
+            }
+
+            public void MulColumn(T value, int index)
+            {
+                for (int i = 0; i < Height(); ++i)
+                {
+                    dynamic iValue = m_values[i, index] as dynamic;
+                    m_values[i, index] = iValue * value;
+                }
+            }
+
+            public Matrix<T> SwapRow(int indexFirst, int indexSecond)
+            {
+                Matrix<T> result = this;
+                for (int i = 0; i < result.Width(); ++i)
+                {
+                    dynamic tmpValue = result.GetValue(indexFirst, i);
+                    result.SetValue(indexFirst, i, result.GetValue(indexSecond, i));
+                    result.SetValue(indexSecond, i, tmpValue);
+                }
+                return result;
+            }
+
+            public Matrix<T> SwapColumn(int indexFirst, int indexSecond)
+            {
+                Matrix<T> result = this;
+                for (int i = 0; i < result.Height(); ++i)
+                {
+                    dynamic tmpValue = result.GetValue(i, indexFirst);
+                    result.SetValue(i, indexFirst, result.GetValue(i, indexSecond));
+                    result.SetValue(i, indexSecond, tmpValue);
+                }
+                return result;
+            }
+
+            public T Determinant()
+            {
+                Matrix<T> resulMatrix = this.ToTriangle();
+                dynamic result = resulMatrix.GetValue(0, 0) as dynamic;
+                for (int i = 1; i < resulMatrix.Height(); ++i)
+                {
+                    dynamic value = resulMatrix.GetValue(i, i) as dynamic;
+                    result *= value;
+                }
+                return result;
+            }
+        
             public static Matrix<T> operator * (Matrix<T> matrix, double value)
             {
                 Matrix<T> result = new Matrix<T>(matrix.Height(), matrix.Width());
