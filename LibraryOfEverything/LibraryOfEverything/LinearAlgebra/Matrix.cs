@@ -327,7 +327,20 @@ namespace LibraryOfEverything
                     dynamic coreValue = result.GetValue(i, i) as dynamic;
                     if (coreValue == default(T))
                     {
-                        SwapRow(i, i + 1);
+                        bool isSwap = false;
+                        for (int j = i + 1; j < result.Height(); ++j)
+                        {
+                            if (result.GetValue(j, i) as dynamic != default(T))
+                            {
+                                SwapRow(i, j);
+                                isSwap = true;
+                                break;
+                            }
+                        }
+                        if (!isSwap)
+                        {
+                            continue;
+                        }
                     }
                     for (int j = i + 1; j < result.Height(); ++j)
                     {
