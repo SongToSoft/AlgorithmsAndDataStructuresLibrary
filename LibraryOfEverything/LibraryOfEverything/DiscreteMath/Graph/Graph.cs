@@ -19,6 +19,7 @@ namespace LibraryOfEverything
             private Queue<int> m_Queue;
             private EConnected m_Connected;
             private int[] m_Parents;
+            private float[] m_Distance;
 
             public Graph(int numberVertex, EConnected connected = EConnected.DOUBLY_CONNECTED)
             {
@@ -27,6 +28,7 @@ namespace LibraryOfEverything
                 m_Way = new List<int>();
                 m_Queue = new Queue<int>();
                 m_Parents = new int[numberVertex];
+                m_Distance = new float[numberVertex];
                 for (int i = 0; i < m_Vertexes.Length; ++i)
                 {
                     m_Vertexes[i] = new Vertex(i);
@@ -157,12 +159,7 @@ namespace LibraryOfEverything
                         }
                     }
                 }
-                //Console.WriteLine("------------");
                 SetNonVisitedVertex();
-                //for (int i = 0; i < m_Parents.Length; ++i)
-                //{
-                //    Console.WriteLine(m_Parents[i]);
-                //}
                 m_Way.Clear();
                 int startParent = end;
                 while (!m_Vertexes[startParent].IsVisited())
@@ -180,12 +177,45 @@ namespace LibraryOfEverything
                 return m_Way;
             }
 
-            //TODO: Boring... look in https://github.com/TakingAway/Graph/blob/master/Graph/Graph.cpp
-            public void Dijkstra(int start)
+            public float[] Dijkstra(int start)
             {
-
+                InitializeDistance();
+                m_Distance[start] = 0;
+                while(CheckVertexVisited())
+                {
+                    int currentVertex = GetMinDistanceIndex();
+                    for (int i = 0; i < m_Vertexes[GetMinDistanceIndex()].GetEdges().Count; ++i)
+                    {
+                        m_Distance[m_Vertexes[currentVertex].GetEdges()[i].GetValue()] = m_Vertexes[currentVertex].GetEdges()[i].GetWeight() + m_Distance[GetMinDistanceIndex()];
+                    }
+                    m_Vertexes[currentVertex].SetVisited(true);
+                }
+                SetNonVisitedVertex();
+                return m_Distance;
             }
 
+            public int GetMinDistanceIndex()
+            {
+                float minDistance = int.MaxValue;
+                int minIndex = 0;
+                for (int i = 0; i < m_Distance.Length; ++i)
+                {
+                    if ((m_Distance[i] < minDistance) && (!m_Vertexes[i].IsVisited()))
+                    {
+                        minDistance = m_Distance[i];
+                        minIndex = i;
+                    }
+                }
+                return minIndex;
+            }
+
+            public void InitializeDistance()
+            {
+                for (int i = 0; i < m_Distance.Length; ++i)
+                {
+                    m_Distance[i] = int.MaxValue;
+                }
+            }
         }
     }
 }
