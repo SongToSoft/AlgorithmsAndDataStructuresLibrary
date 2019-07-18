@@ -3,94 +3,91 @@ using System.Collections.Generic;
 
 namespace AlgorithmsAndDataStructuresLibrary.DiscreteMath.Graph
 {
-    namespace DiscreteMath
+    public class Vertex
     {
-        public class Vertex
+        private int m_Value;
+        private bool m_IsVisited = false;
+        private List<Edge> m_Edges;
+        private int m_Parent = -2;
+        private int m_ConnectedCount = 0;
+
+        public Vertex(int value, float weight = 0)
         {
-            private int m_Value;
-            private bool m_IsVisited = false;
-            private List<Edge> m_Edges;
-            private int m_Parent = -2;
-            private int m_ConnectedCount = 0;
+            m_Value = value;
+            m_Edges = new List<Edge>();
+        }
 
-            public Vertex(int value, float weight = 0)
-            {
-                m_Value = value;
-                m_Edges = new List<Edge>();
-            }
+        public void AddEdge(int value, float weight = 1)
+        {
+            m_Edges.Add(new Edge(value, weight));
+        }
 
-            public void AddEdge(int value, float weight = 1)
-            {
-                m_Edges.Add(new Edge(value, weight));
-            }
+        public List<Edge> GetEdges()
+        {
+            return m_Edges;
+        }
 
-            public List<Edge> GetEdges()
+        public void RemoveEdge(int value)
+        {
+            for (int i = 0; i < m_Edges.Count; ++i)
             {
-                return m_Edges;
-            }
-
-            public void RemoveEdge(int value)
-            {
-                for (int i = 0; i < m_Edges.Count; ++i)
+                var graphNode = m_Edges[i];
+                if (graphNode.GetValue() == value)
                 {
-                    var graphNode = m_Edges[i];
-                    if (graphNode.GetValue() == value)
-                    {
-                        m_Edges.Remove(graphNode);
-                        break;
-                    }
+                    m_Edges.Remove(graphNode);
+                    break;
                 }
             }
+        }
 
-            public int GetValue()
-            {
-                return m_Value;
-            }
+        public int GetValue()
+        {
+            return m_Value;
+        }
 
-            public void SetValue(int value)
-            {
-                m_Value = value;
-            }
+        public void SetValue(int value)
+        {
+            m_Value = value;
+        }
 
-            public bool IsVisited()
-            {
-                return m_IsVisited;
-            }
+        public bool IsVisited()
+        {
+            return m_IsVisited;
+        }
 
-            public void SetVisited(bool visited)
-            {
-                m_IsVisited = visited;
-            }
+        public void SetVisited(bool visited)
+        {
+            m_IsVisited = visited;
+        }
 
-            public void SetParent(int parent)
-            {
-                m_Parent = parent;
-            }
+        public void SetParent(int parent)
+        {
+            m_Parent = parent;
+        }
 
-            public int GetParent()
-            {
-                return m_Parent;
-            }
-            
-            public void SetConnectedCount(int connectedCount)
-            {
-                m_ConnectedCount = connectedCount;
-            }
+        public int GetParent()
+        {
+            return m_Parent;
+        }
 
-            public int GetConnectedCount()
-            {
-                return m_ConnectedCount;
-            }
+        public void SetConnectedCount(int connectedCount)
+        {
+            m_ConnectedCount = connectedCount;
+        }
 
-            public void Print()
+        public int GetConnectedCount()
+        {
+            return m_ConnectedCount;
+        }
+
+        public void Print()
+        {
+            Console.Write("Vertex " + m_Value + ": ");
+            for (int i = 0; i < m_Edges.Count; ++i)
             {
-                Console.Write("Vertex " + m_Value + ": ");
-                for (int i = 0; i < m_Edges.Count; ++i)
-                {
-                    Console.Write(" (" + m_Edges[i].GetValue() + " -- " + m_Edges[i].GetWeight() + ") ");
-                }
-                Console.WriteLine();
+                Console.Write(" (" + m_Edges[i].GetValue() + " -- " + m_Edges[i].GetWeight() + ") ");
             }
+            Console.WriteLine();
         }
     }
 }

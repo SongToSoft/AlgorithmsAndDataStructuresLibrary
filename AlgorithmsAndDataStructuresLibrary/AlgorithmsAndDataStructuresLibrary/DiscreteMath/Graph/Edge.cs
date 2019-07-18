@@ -6,38 +6,35 @@ using System.Threading.Tasks;
 
 namespace AlgorithmsAndDataStructuresLibrary.DiscreteMath.Graph
 {
-    namespace DiscreteMath
+    public class Edge
     {
-        public class Edge
+        private int m_Value;
+        private float m_Weight;
+
+        public Edge(int value, float weight = 1)
         {
-            private int m_Value;
-            private float m_Weight;
+            m_Value = value;
+            m_Weight = weight;
+        }
 
-            public Edge(int value, float weight = 1)
-            {
-                m_Value = value;
-                m_Weight = weight;
-            }
+        public int GetValue()
+        {
+            return m_Value;
+        }
 
-            public int GetValue()
-            {
-                return m_Value;
-            }
+        public void SetValue(int value)
+        {
+            m_Value = value;
+        }
 
-            public void SetValue(int value)
-            {
-                m_Value = value;
-            }
+        public float GetWeight()
+        {
+            return m_Weight;
+        }
 
-            public float GetWeight()
-            {
-                return m_Weight;
-            }
-
-            public void SetWeight(float weight)
-            {
-                m_Weight = weight;
-            }
+        public void SetWeight(float weight)
+        {
+            m_Weight = weight;
         }
     }
 }
