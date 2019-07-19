@@ -546,12 +546,12 @@ namespace AlgorithmsAndDataStructuresLibrary.LinearAlgebra
                 return result;
             }
 
+            //Result matrix is not a real inverse matrix like A(^-1)
             public static Matrix<T> operator !(Matrix<T> matrix)
             {
                 Matrix<T> result = new Matrix<T>(matrix);
                 result *= -1;
                 return result;
-
             }
         }
     }
