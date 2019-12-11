@@ -10,10 +10,13 @@ namespace AlgorithmsAndDataStructuresLibrary.DiscreteMath.Graph
         private List<Edge> m_Edges;
         private int m_Parent = -2;
         private int m_ConnectedCount = 0;
+        private int m_x, m_y;
 
-        public Vertex(int value, float weight = 0)
+        public Vertex(int value, float weight = 0, int x = 0, int y = 0)
         {
             m_Value = value;
+            m_x = x;
+            m_y = y;
             m_Edges = new List<Edge>();
         }
 
@@ -78,6 +81,26 @@ namespace AlgorithmsAndDataStructuresLibrary.DiscreteMath.Graph
         public int GetConnectedCount()
         {
             return m_ConnectedCount;
+        }
+
+        public int GetPositionX()
+        {
+            return m_x;
+        }
+
+        public int GetPositionY()
+        {
+            return m_y;
+        }
+
+        public void SetPositionX(int x)
+        {
+            m_x = x;
+        }
+
+        public void SetPositionY(int y)
+        {
+            m_y = y;
         }
 
         public void Print()
