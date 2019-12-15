@@ -30,6 +30,18 @@ namespace AlgorithmsAndDataStructuresLibrary.DiscreteMath.Graph
             return m_Edges;
         }
 
+        public bool CheckEdge(int vertex)
+        {
+            for (int i = 0; i < m_Edges.Count; ++i)
+            {
+                if (m_Edges[i].GetValue() == vertex)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+ 
         public void RemoveEdge(int value)
         {
             for (int i = 0; i < m_Edges.Count; ++i)
@@ -93,13 +105,9 @@ namespace AlgorithmsAndDataStructuresLibrary.DiscreteMath.Graph
             return m_y;
         }
 
-        public void SetPositionX(int x)
+        public void SetPosition(int x, int y)
         {
             m_x = x;
-        }
-
-        public void SetPositionY(int y)
-        {
             m_y = y;
         }
 
